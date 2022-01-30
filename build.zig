@@ -13,18 +13,18 @@ pub fn build(b: *std.build.Builder) void {
 
     const exe = b.addExecutable("Discord", "src/main.zig");
 
-    exe.linkSystemLibrary("discord");
-    exe.linkSystemLibrary("curl");
-
-    // exe.addIncludeDir("orca");
-    // exe.addIncludeDir("orca/common");
-    // exe.addIncludeDir("orca/cee-utils");
-
-    exe.linkLibC();
-
     exe.setTarget(target);
     exe.setBuildMode(mode);
     exe.install();
+
+    exe.addSystemIncludeDir("orca");
+    exe.addSystemIncludeDir("orca/common");
+    exe.addSystemIncludeDir("orca/cee-utils");
+
+    exe.linkSystemLibrary("discord");
+    exe.linkSystemLibrary("curl");
+
+    exe.linkLibC();
 
     const run_cmd = exe.run();
     run_cmd.step.dependOn(b.getInstallStep());

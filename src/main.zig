@@ -1,6 +1,6 @@
 const std = @import("std");
 const orca = @cImport({
-    @cInclude("orca/discord.h");
+    @cInclude("discord.h");
 });
 
 fn on_ready(client: ?*orca.discord) callconv(.C) void {
